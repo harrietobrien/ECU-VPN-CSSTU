@@ -1,0 +1,46 @@
+site_name: ECU VPN and CSSTU Server
+
+theme:
+  name: material
+  highlightjs: true
+  hljs_style: base16-gigavolt
+  features:
+    - navigation.sections
+  hide:
+    - toc
+
+nav:
+  - Home: index.md
+  - Guides:
+      - Install Cisco Secure Client: install.md
+      - Enable VPN Agent Daemon: vpn.md
+      - Connect to ECU VPN: connect.md
+      - SSH Keys and Configuration: ssh.md
+      - Login and Host Verification: login.md
+      - SCP → Build → Submit: workflow.md
+
+markdown_extensions:
+  - admonition
+  - footnotes
+  - attr_list
+  - md_in_html
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+
+extra_javascript:
+  - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js
+
+extra_css:
+  - https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/base16/gigavolt.min.css
+
+extra:
+  hljs_languages:
+    - bash
+    - yaml
+    - ini
