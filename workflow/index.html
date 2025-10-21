@@ -437,22 +437,26 @@
   <h1>SCP → Build → Submit</h1>
 
 <p><strong>Copy your project to the server using <code>scp</code> (Secure Copy Protocol):</strong>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>scp<span class="w"> </span>-r<span class="w"> </span>~/project<span class="w"> </span>username@csstu.intra.ecu.edu:~
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nv">project</span><span class="o">=</span><span class="s2">&quot;/path/to/project&quot;</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>scp<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">project</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>username@csstu.intra.ecu.edu:~
 </span></code></pre></div>
 ⤷ <code>-r</code> initiates recursive secure copy (necessary for directories)</p>
 <blockquote>
 <p><strong>Note:</strong> Replace <code>username</code> with your PirateID. </p>
 </blockquote>
 <p>After setting up <code>Host ecu</code> alias in <code>~/.ssh/config</code>:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>scp<span class="w"> </span>-r<span class="w"> </span>~/project<span class="w"> </span>ecu:~
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>scp<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">project</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>ecu:~
 </span></code></pre></div></p>
-<p><strong>Rebuild on the server:</strong></p>
-<p>Run cmake with path to root directory (<code>.</code>) and path to build directory (<code>build</code>)
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span>~/project
+<p><strong>Rebuild on the server:</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">cd</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">project</span><span class="si">}</span><span class="s2">&quot;</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>cmake<span class="w"> </span>-S<span class="w"> </span>.<span class="w"> </span>-B<span class="w"> </span>build<span class="w"> </span>--fresh
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>cmake<span class="w"> </span>--build<span class="w"> </span>build
 </span></code></pre></div>
-⤷ <code>--fresh</code> performs a fresh configuration of the build tree, removing any existing <code>CMakeCache.txt</code> file and associated <code>CMakeFiles/</code> directory, and recreates them from scratch.</p>
+<strong>Bundle as binary archive for submission:</strong>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">cd</span><span class="w"> </span>..
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>find<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">project</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>-type<span class="w"> </span>-f<span class="w"> </span><span class="p">|</span><span class="w"> </span>cpio<span class="w"> </span>-o<span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">project</span><span class="si">}</span><span class="s2">.cpio&quot;</span>
+</span></code></pre></div></p>
 
 
 
