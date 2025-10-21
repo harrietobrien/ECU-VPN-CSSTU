@@ -11,33 +11,11 @@ scp -r ~/project ecu:~
 ```
 
 **Rebuild on the server:**
+
+Run cmake with path to root directory (`.`) and path to build directory (`build`)
 ```bash
 cd ~/project
-rm -rf build cmake-build-* CMakeFiles CMakeCache.txt
-cmake -S . -B build
+cmake -S . -B build --fresh
 cmake --build build
 ```
-
-**Submission script**
-
-Create `submit.sh`:
-```bash
-vim submit.sh
-```
-
-Enter or Paste:
-```bash
-#!/usr/bin/env bash
-SUBMIT=~gopal-assignments/csci6410-fall25/bin/submit
-
-FILES=$(find . -type f \( -name "*.c" -o -name "*.h" -o -name "CMakeLists.txt" -o -name "Makefile" -o -iname "readme*" \) -not -path "./build/*" -not -path "./cmake-build-*/*")
-
-${SUBMIT} 1 ${FILES}
-```
-
-Make `submit.sh` executable and run:
-```bash
-chmod +x submit.sh
-./submit.sh
-```
-⤷ `+x` adds the execute permission for all users to the existing permissions
+⤷ `--fresh` performs a fresh configuration of the build tree, removing any existing `CMakeCache.txt` file and associated `CMakeFiles/` directory, and recreates them from scratch.
